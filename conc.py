@@ -148,7 +148,7 @@ g_t = np.zeros(g_num_data_points)     # Output times (hours)
 g_conc = np.zeros(g_num_data_points)  # Output concentrations
 
 g_t_wp = 0                          # Waypoint time (hours)
-g_conc_wp = 0                       # Waypoint 
+g_conc_wp = 0                       # Waypoint concentration
 
 g_next_op_i = 0                     # Next output index
 g_filtered = 0                      # Number of duplicate outputs filtered
