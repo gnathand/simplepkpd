@@ -90,16 +90,15 @@ def time_step(dose, dt, output_dt=None):
   # Intermediate t, conc
   t = math.ceil(g_t_wp/output_dt)*output_dt     # next output time >= g_t_wp
   t_end = g_t_wp+dt
-  conc_0 = g_conc_wp
  
   while t<t_end:
-   conc = rate/g_k + (conc_0-rate/g_k)*math.exp(-g_k*(t-g_t_wp))
+   conc = rate/g_k + (g_conc_wp-rate/g_k)*math.exp(-g_k*(t-g_t_wp))
    add_output_data(t,conc)
   
    t += output_dt
  
   g_t_wp = t_end
-  g_conc_wp = rate/g_k + (conc_0-rate/g_k)*math.exp(-g_k*dt)
+  g_conc_wp = rate/g_k + (g_conc_wp-rate/g_k)*math.exp(-g_k*dt)
  
   add_output_data(g_t_wp, g_conc_wp)
  
