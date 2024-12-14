@@ -65,7 +65,7 @@ def time_step(dose, dt, output_dt=None):
  
  dose               Dose to administer
  dt                 Time over which to administer dose. May be 0.
- output_dt          Time interval at which to output concentrations (defaults to global output_interval)
+ output_dt          Time interval at which to output concentrations (default: g_output_dt)
  
  Calculation:
   - t time
@@ -112,10 +112,10 @@ def dose(dose, dose_interval, absorption_time=None, output_dt=None):
  dose               Dose to administer
  dose_interval      Time between taking this dose and taking next dose (h)
  absorption_time    Time for dose to absorb (h). Must be < dose_interval. May be 0.
- 
+                    (Default: g_absorption_time)
  output_dt          Output time interval (defaults to global output_interval)
  """
- if absorption_time == None:
+ if absorption_time is None:
   absorption_time = g_absorption_time
   
  if absorption_time>dose_interval:
