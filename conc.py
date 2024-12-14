@@ -40,21 +40,21 @@ def administer_doses():
 ####################################################################################################
 
 def add_output_data(t, conc):
- global g_t_wp, g_conc_wp, g_next_op, g_count_data_points, g_num_data_points, g_filtered
+ global g_t, g_conc, g_next_op_i, g_count_data_points, g_num_data_points, g_filtered
   
  if g_count_data_points:
   g_num_data_points += 1
   return
  else:
   # Filter duplicates
-  if g_next_op>=1 and g_t[g_next_op-1]==t and g_conc[g_next_op-1]==conc:
+  if g_next_op_i>=1 and g_t[g_next_op_i-1]==t and g_conc[g_next_op_i-1]==conc:
    g_filtered += 1
    return
   
-  g_t[g_next_op] = t
-  g_conc[g_next_op] = conc
+  g_t[g_next_op_i] = t
+  g_conc[g_next_op_i] = conc
  
-  g_next_op += 1
+  g_next_op_i += 1
 
 
 
@@ -136,20 +136,21 @@ g_num_data_points = 0
 
 # Dummy run to find number of data points
 
-g_t_wp = 0                             # Waypoint time (hours)
-g_conc_wp = 0                          # Waypoint drug concentration
+g_t_wp = 0                          # Waypoint time (hours)
+g_conc_wp = 0                       # Waypoint concentration
 g_count_data_points = True
 
 administer_doses()
 
 # Run it for real this time
 
-g_t = np.zeros(g_num_data_points)
-g_conc = np.zeros(g_num_data_points)
+g_t = np.zeros(g_num_data_points)     # Output times (hours)
+g_conc = np.zeros(g_num_data_points)  # Output concentrations
 
-g_t_wp = 0
-g_conc_wp = 0
-g_next_op = 0                       # Next output index
+g_t_wp = 0                          # Waypoint time (hours)
+g_conc_wp = 0                       # Waypoint 
+
+g_next_op_i = 0                     # Next output index
 g_filtered = 0                      # Number of duplicate outputs filtered
 g_count_data_points = False
 
